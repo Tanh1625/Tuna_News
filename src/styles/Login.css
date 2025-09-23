@@ -1,0 +1,53 @@
+.login-bg {
+  background-image: url("../assets/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+/* Remove Bootstrap Container padding when used with login-bg */
+.login-bg.container,
+.login-bg.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: none !important;
+}
+
+/* Remove Bootstrap Row margin */
+.login-bg .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-glass .form-control:focus {
+  border-color: #3f64fa; /* đổi màu viền khi focus */
+  box-shadow: 0 0 0 0.2rem rgba(236, 236, 235, 0.25);
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.input-glass .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+.input-glass .form-control::placeholder {
+  color: #fff; /* đổi placeholder thành trắng */
+}
