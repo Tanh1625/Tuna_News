@@ -1,6 +1,21 @@
 import { useState } from "react";
-import { Container, Navbar, Nav, NavDropdown, Form, Button, Badge } from "react-bootstrap";
-import { Bell, ChatDots, PersonCircle, Search, House, Newspaper } from "react-bootstrap-icons";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Form,
+  Button,
+  Badge,
+} from "react-bootstrap";
+import {
+  Bell,
+  ChatDots,
+  PersonCircle,
+  Search,
+  House,
+} from "react-bootstrap-icons";
+import logoImage from "../../assets/images/logo.png";
 import "../../styles/components/Header.css";
 
 export default function Header() {
@@ -17,8 +32,13 @@ export default function Header() {
       <Container fluid>
         {/* Logo */}
         <Navbar.Brand href="/home" className="d-flex align-items-center">
-          <Newspaper size={32} className="text-primary me-2" />
-          <span className="fw-bold fs-4 text-primary">NewsHub</span>
+          <img
+            src={logoImage}
+            alt="TunashNew"
+            className="me-2 logo-img"
+            style={{ height: "40px", width: "auto" }}
+          />
+          {/* <span className="fw-bold fs-4 text-primary">TunashNew</span> */}
         </Navbar.Brand>
 
         {/* Search Bar */}
@@ -30,8 +50,8 @@ export default function Header() {
               className="search-input rounded-pill"
               style={{ maxWidth: "500px" }}
             />
-            <Button 
-              variant="outline-secondary" 
+            <Button
+              variant="outline-secondary"
               className="search-btn position-absolute"
               style={{ right: "5px", top: "3px", border: "none" }}
             >
@@ -64,8 +84,8 @@ export default function Header() {
             <Nav.Link className="position-relative me-2">
               <Bell size={20} />
               {notifications > 0 && (
-                <Badge 
-                  bg="danger" 
+                <Badge
+                  bg="danger"
                   className="position-absolute top-0 start-100 translate-middle rounded-pill"
                   style={{ fontSize: "10px" }}
                 >
@@ -78,8 +98,8 @@ export default function Header() {
             <Nav.Link className="position-relative me-3">
               <ChatDots size={20} />
               {messages > 0 && (
-                <Badge 
-                  bg="primary" 
+                <Badge
+                  bg="primary"
                   className="position-absolute top-0 start-100 translate-middle rounded-pill"
                   style={{ fontSize: "10px" }}
                 >

@@ -29,9 +29,53 @@
       "email": "dotuananh1625@gmail.com",
       "password": "123456",
       "confirmPassword": "123456",
-      "country": "vietNam",
+      "country": "Vietnam",
       "createdAt": "2025-09-28T03:13:25.270Z",
+      "role": "contributor",
+      "accessToken": "user_token"
+    },
+    {
+      "id": "3",
+      "userName": "minh_reporter",
+      "gender": "male",
+      "email": "minh.bao@newshub.vn",
+      "password": "123456",
       "role": "user",
+      "country": "Vietnam",
+      "createdAt": "2025-09-22T14:20:00Z",
+      "accessToken": "user_token"
+    },
+    {
+      "id": "4",
+      "userName": "linh_tech",
+      "gender": "female",
+      "email": "linh.tech@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "country": "Vietnam",
+      "createdAt": "2025-09-23T09:45:00Z",
+      "accessToken": "user_token"
+    },
+    {
+      "id": "5",
+      "userName": "duc_sports",
+      "gender": "male",
+      "email": "duc.thethao@yahoo.com",
+      "password": "123456",
+      "role": "user",
+      "country": "Vietnam",
+      "createdAt": "2025-09-24T16:30:00Z",
+      "accessToken": "user_token"
+    },
+    {
+      "id": "6",
+      "userName": "hana_lifestyle",
+      "gender": "female",
+      "email": "hana.style@outlook.com",
+      "password": "123456",
+      "role": "user",
+      "country": "Korea",
+      "createdAt": "2025-09-25T11:15:00Z",
       "accessToken": "user_token"
     }
   ],
@@ -41,14 +85,10 @@
       "title": "Việt Nam giành chiến thắng 3-0 trước Thái Lan",
       "excerpt": "Đội tuyển Việt Nam đã có một trận đấu xuất sắc tại vòng loại World Cup...",
       "content": "Chi tiết trận đấu: Việt Nam kiểm soát bóng 65%, ghi 3 bàn thắng vào các phút 20, 55 và 78...",
-      "authorId": 2,
+      "authorId": "5",
       "category": "Thể thao",
-      "tags": [
-        "bóng đá",
-        "World Cup",
-        "Việt Nam"
-      ],
-      "thumbnail": "https://picsum.photos/seed/football/400/250",
+      "tags": ["bóng đá", "World Cup", "Việt Nam"],
+      "thumbnail": "https://picsum.photos/seed/football/600/400",
       "createdAt": "2025-09-25T14:00:00Z",
       "views": 1540,
       "likes": 120
@@ -58,33 +98,300 @@
       "title": "Apple ra mắt iPhone 17 Pro Max",
       "excerpt": "iPhone 17 Pro Max chính thức được công bố với nhiều cải tiến vượt trội...",
       "content": "Theo sự kiện Apple Event 2025, iPhone 17 Pro Max sở hữu chip A19 Bionic, camera 200MP...",
-      "authorId": 1,
+      "authorId": "4",
       "category": "Công nghệ",
-      "tags": [
-        "Apple",
-        "iPhone",
-        "Công nghệ"
-      ],
-      "thumbnail": "https://picsum.photos/seed/iphone/400/250",
+      "tags": ["Apple", "iPhone", "Công nghệ"],
+      "thumbnail": "https://picsum.photos/seed/iphone/600/400",
       "createdAt": "2025-09-26T09:30:00Z",
       "views": 2400,
       "likes": 310
+    },
+    {
+      "id": "3",
+      "title": "Chính phủ công bố gói hỗ trợ kinh tế mới",
+      "excerpt": "Gói hỗ trợ 50.000 tỷ đồng nhằm thúc đẩy tăng trưởng kinh tế trong quý IV/2025...",
+      "content": "Thủ tướng Chính phủ vừa ký quyết định phê duyệt gói hỗ trợ kinh tế trọng điểm...",
+      "authorId": "3",
+      "category": "Kinh tế",
+      "tags": ["chính phủ", "kinh tế", "hỗ trợ"],
+      "thumbnail": "https://picsum.photos/seed/economy/600/400",
+      "createdAt": "2025-09-27T07:15:00Z",
+      "views": 1890,
+      "likes": 89
+    },
+    {
+      "id": "4",
+      "title": "Khám phá xu hướng thời trang Thu-Đông 2025",
+      "excerpt": "Những xu hướng thời trang hot nhất mùa Thu-Đông 2025 từ các tuần lễ thời trang thế giới...",
+      "content": "Milan Fashion Week và Paris Fashion Week đã khép lại với những bộ sưu tập ấn tượng...",
+      "authorId": "6",
+      "category": "Thời trang",
+      "tags": ["thời trang", "xu hướng", "thu đông"],
+      "thumbnail": "https://picsum.photos/seed/fashion/600/400",
+      "createdAt": "2025-09-27T12:45:00Z",
+      "views": 867,
+      "likes": 156
+    },
+    {
+      "id": "5",
+      "title": "ChatGPT-5 chính thức ra mắt với khả năng AI vượt trội",
+      "excerpt": "OpenAI công bố ChatGPT-5 với khả năng xử lý đa phương tiện và tốc độ cải thiện 10x...",
+      "content": "Phiên bản ChatGPT-5 mới được tích hợp khả năng xử lý hình ảnh, video và âm thanh...",
+      "authorId": "4",
+      "category": "Công nghệ",
+      "tags": ["AI", "ChatGPT", "OpenAI"],
+      "thumbnail": "https://picsum.photos/seed/chatgpt/600/400",
+      "createdAt": "2025-09-27T16:20:00Z",
+      "views": 3250,
+      "likes": 445
+    },
+    {
+      "id": "6",
+      "title": "Ronaldo ghi bàn thứ 900 trong sự nghiệp",
+      "excerpt": "Cristiano Ronaldo đã chạm mốc 900 bàn thắng trong trận đấu Al Nassr vs Al Hilal...",
+      "content": "Siêu sao người Bồ Đào Nha tiếp tục khẳng định đẳng cấp với cú đúp trong trận thắng 3-1...",
+      "authorId": "5",
+      "category": "Thể thao",
+      "tags": ["Ronaldo", "Al Nassr", "bóng đá"],
+      "thumbnail": "https://picsum.photos/seed/ronaldo/600/400",
+      "createdAt": "2025-09-28T20:30:00Z",
+      "views": 4560,
+      "likes": 678
+    },
+    {
+      "id": "7",
+      "title": "Giá Bitcoin vượt mốc 70.000 USD",
+      "excerpt": "Thị trường tiền điện tử bùng nổ khi Bitcoin thiết lập kỷ lục mới...",
+      "content": "Sau một thời gian dài trong xu hướng tăng, Bitcoin đã vượt qua ngưỡng kháng cự quan trọng...",
+      "authorId": "3",
+      "category": "Kinh tế",
+      "tags": ["Bitcoin", "cryptocurrency", "tài chính"],
+      "thumbnail": "https://picsum.photos/seed/bitcoin/600/400",
+      "createdAt": "2025-09-28T08:15:00Z",
+      "views": 2890,
+      "likes": 234
+    },
+    {
+      "id": "8",
+      "title": "Top 5 món ăn Việt được thế giới yêu thích nhất",
+      "excerpt": "CNN Travel công bố danh sách những món ăn Việt Nam được du khách quốc tế ưa chuộng...",
+      "content": "Phở, bánh mì, bún bò Huế dẫn đầu danh sách với số điểm bình chọn ấn tượng...",
+      "authorId": "2",
+      "category": "Ẩm thực",
+      "tags": ["ẩm thực", "Việt Nam", "du lịch"],
+      "thumbnail": "https://picsum.photos/seed/pho/600/400",
+      "createdAt": "2025-09-28T11:30:00Z",
+      "views": 1567,
+      "likes": 203
+    },
+    {
+      "id": "9",
+      "title": "Tesla Model Y 2026 - Tương lai của xe điện",
+      "excerpt": "Elon Musk tiết lộ những tính năng đột phá của Tesla Model Y thế hệ mới...",
+      "content": "Với pin 4680 mới và khả năng tự lái hoàn toàn, Model Y 2026 hứa hẹn cách mạng hóa ngành ô tô...",
+      "authorId": "4",
+      "category": "Công nghệ",
+      "tags": ["Tesla", "xe điện", "Elon Musk"],
+      "thumbnail": "https://picsum.photos/seed/tesla/600/400",
+      "createdAt": "2025-09-28T14:45:00Z",
+      "views": 2134,
+      "likes": 298
+    },
+    {
+      "id": "10",
+      "title": "Cách chăm sóc da mùa khô hiệu quả",
+      "excerpt": "Những bí quyết giúp làn da luôn mềm mại và tràn đầy sức sống trong mùa khô hanh...",
+      "content": "Chuyên gia da liễu chia sẻ 7 bước chăm sóc da cơ bản và những sản phẩm nên sử dụng...",
+      "authorId": "6",
+      "category": "Sức khỏe",
+      "tags": ["chăm sóc da", "sức khỏe", "làm đẹp"],
+      "thumbnail": "https://picsum.photos/seed/skincare/600/400",
+      "createdAt": "2025-09-28T18:20:00Z",
+      "views": 945,
+      "likes": 127
+    },
+    {
+      "id": "11",
+      "title": "Lễ hội Tết Trung thu 2025 tại Hà Nội",
+      "excerpt": "Phố cổ Hà Nội rộn ràng với các hoạt động văn hóa truyền thống dịp Tết Trung thu...",
+      "content": "Hàng nghìn du khách trong và ngoài nước đã đến tham gia các hoạt động múa lân, thả đèn lồng...",
+      "authorId": "2",
+      "category": "Văn hóa",
+      "tags": ["Tết Trung thu", "Hà Nội", "văn hóa"],
+      "thumbnail": "https://picsum.photos/seed/midautumn/600/400",
+      "createdAt": "2025-09-28T19:00:00Z",
+      "views": 1456,
+      "likes": 189
+    },
+    {
+      "id": "12",
+      "title": "Phát hiện loài động vật mới tại Vườn Quốc gia Cát Tiên",
+      "excerpt": "Nhóm nghiên cứu quốc tế vừa phát hiện một loài khỉ mới chưa từng được ghi nhận...",
+      "content": "Loài khỉ mới thuộc họ Cercopithecidae được tìm thấy trong khu rừng nguyên sinh...",
+      "authorId": "3",
+      "category": "Khoa học",
+      "tags": ["khám phá", "động vật", "khoa học"],
+      "thumbnail": "https://picsum.photos/seed/monkey/600/400",
+      "createdAt": "2025-09-28T21:15:00Z",
+      "views": 678,
+      "likes": 95
     }
   ],
   "comments": [
     {
       "id": "1",
-      "articleId": 1,
-      "userId": 1,
+      "articleId": "1",
+      "userId": "1",
       "content": "Trận đấu quá hay, chúc mừng đội tuyển!",
       "createdAt": "2025-09-25T15:20:00Z"
     },
     {
       "id": "2",
-      "articleId": 2,
-      "userId": 2,
+      "articleId": "2",
+      "userId": "2",
       "content": "iPhone mới quá đỉnh, nhưng chắc giá cao lắm!",
       "createdAt": "2025-09-26T11:00:00Z"
+    },
+    {
+      "id": "3",
+      "articleId": "1",
+      "userId": "3",
+      "content": "Công Phượng ghi bàn đẹp quá! 🔥",
+      "createdAt": "2025-09-25T16:30:00Z"
+    },
+    {
+      "id": "4",
+      "articleId": "3",
+      "userId": "4",
+      "content": "Hy vọng gói hỗ trợ này sẽ giúp nền kinh tế phục hồi nhanh chóng",
+      "createdAt": "2025-09-27T08:45:00Z"
+    },
+    {
+      "id": "5",
+      "articleId": "2",
+      "userId": "5",
+      "content": "Camera 200MP nghe thật ấn tượng! Chờ review chi tiết",
+      "createdAt": "2025-09-26T14:20:00Z"
+    },
+    {
+      "id": "6",
+      "articleId": "4",
+      "userId": "6",
+      "content": "Màu pastel năm nay thực sự trendy, đã order mấy set rồi 😍",
+      "createdAt": "2025-09-27T13:15:00Z"
+    },
+    {
+      "id": "7",
+      "articleId": "5",
+      "userId": "1",
+      "content": "ChatGPT-5 sẽ thay đổi hoàn toàn cách chúng ta làm việc!",
+      "createdAt": "2025-09-27T17:00:00Z"
+    },
+    {
+      "id": "8",
+      "articleId": "6",
+      "userId": "2",
+      "content": "Ronaldo vẫn là GOAT! 900 bàn thắng thật đáng kinh ngạc 👑",
+      "createdAt": "2025-09-28T21:00:00Z"
+    },
+    {
+      "id": "9",
+      "articleId": "7",
+      "userId": "3",
+      "content": "Bitcoin lên 70k rồi! Ai hold từ đầu năm chắc vui lắm 🚀",
+      "createdAt": "2025-09-28T09:30:00Z"
+    },
+    {
+      "id": "10",
+      "articleId": "8",
+      "userId": "4",
+      "content": "Phở Việt Nam số 1! Tự hào quá 🇻🇳",
+      "createdAt": "2025-09-28T12:45:00Z"
+    },
+    {
+      "id": "11",
+      "articleId": "9",
+      "userId": "5",
+      "content": "Tesla Model Y mới trông rất futuristic, nhưng giá chắc không rẻ",
+      "createdAt": "2025-09-28T15:30:00Z"
+    },
+    {
+      "id": "12",
+      "articleId": "10",
+      "userId": "6",
+      "content": "Tips chăm sóc da rất hữu ích, cảm ơn tác giả! ✨",
+      "createdAt": "2025-09-28T19:10:00Z"
+    },
+    {
+      "id": "13",
+      "articleId": "11",
+      "userId": "2",
+      "content": "Tết Trung thu ở phố cổ rất đẹp, năm nào cũng đi 🏮",
+      "createdAt": "2025-09-28T19:45:00Z"
+    },
+    {
+      "id": "14",
+      "articleId": "12",
+      "userId": "1",
+      "content": "Việt Nam có biodiversity rất phong phú, cần bảo vệ tốt hơn 🌿",
+      "createdAt": "2025-09-28T22:00:00Z"
+    },
+    {
+      "id": "15",
+      "articleId": "5",
+      "userId": "3",
+      "content": "Mình đã test ChatGPT-5 beta, thực sự impressive!",
+      "createdAt": "2025-09-27T18:30:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Công nghệ",
+      "description": "Tin tức về công nghệ, AI, gadgets",
+      "color": "#007bff"
+    },
+    {
+      "id": "2",
+      "name": "Thể thao",
+      "description": "Tin tức thể thao trong và ngoài nước",
+      "color": "#28a745"
+    },
+    {
+      "id": "3",
+      "name": "Kinh tế",
+      "description": "Tin tức kinh tế, tài chính, chứng khoán",
+      "color": "#ffc107"
+    },
+    {
+      "id": "4",
+      "name": "Thời trang",
+      "description": "Xu hướng thời trang và lifestyle",
+      "color": "#e83e8c"
+    },
+    {
+      "id": "5",
+      "name": "Ẩm thực",
+      "description": "Món ngon, công thức nấu ăn",
+      "color": "#fd7e14"
+    },
+    {
+      "id": "6",
+      "name": "Sức khỏe",
+      "description": "Tin tức y tế, chăm sóc sức khỏe",
+      "color": "#20c997"
+    },
+    {
+      "id": "7",
+      "name": "Văn hóa",
+      "description": "Văn hóa, lễ hội, truyền thống",
+      "color": "#6610f2"
+    },
+    {
+      "id": "8",
+      "name": "Khoa học",
+      "description": "Khám phá khoa học, nghiên cứu mới",
+      "color": "#17a2b8"
     }
   ]
 }

@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            Component: Demo,
+            Component: Home,
           },
         ],
       },

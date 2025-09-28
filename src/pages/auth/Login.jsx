@@ -18,7 +18,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const userIcon = <img src={userSvg} alt="User Icon" />;
   const lockIcon = <img src={lockSvg} alt="Lock Icon" />;
@@ -35,7 +35,6 @@ export default function Login() {
     },
   });
 
-
   const onSubmit = async (data) => {
     try {
       const { userName, password } = data;
@@ -46,14 +45,13 @@ export default function Login() {
       const res = await login(user);
       localStorage.setItem("user", JSON.stringify(res));
       localStorage.setItem("accessToken", res.accessToken);
-      setError('');
-      navigate("/demo");
-
+      setError("");
+      navigate("/home");
     } catch (error) {
       setError(error.message || "Đăng nhập thất bại. Vui lòng thử lại.");
       console.error("Login error:", error);
     } finally {
-        stopLoading();
+      stopLoading();
     }
   };
 
@@ -96,9 +94,7 @@ export default function Login() {
               {/* API Error Display */}
               {error && (
                 <div className="alert alert-danger mb-3" role="alert">
-                  <small>
-                    {error}
-                  </small>
+                  <small>{error}</small>
                 </div>
               )}
 
