@@ -1,14 +1,12 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 //component
-import LoadingSpinner from './components/global/loading-spinner';
-import { LoadingProvider } from './context/loading-context'
-import Login from './layouts/Login'
+import LoadingSpinner from "./components/global/loading-spinner";
+import { LoadingProvider } from "./context/loading-context";
+import Login from "./pages/auth/Login";
 //styles
-import './App.css'
+import "./App.css";
 
 function App() {
-
-
   return (
     <>
       <LoadingProvider>
@@ -19,4 +17,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

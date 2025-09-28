@@ -22,11 +22,11 @@ export default function CustomTextField({
   errors,
   type = 'text',
   placeholder = 'Nhập ...',
-  label,
+  label = null,
   required = false,
   className = '',
   icon,
-  rules, // Thêm rules
+  rules = {}, // Rules prop
 }) {
   const errorForField = errors?.[name]
   const [showPassword, setShowPassword] = useState(false)
@@ -44,7 +44,7 @@ export default function CustomTextField({
       <Controller
         name={name}
         control={control}
-        rules={rules} // Sử dụng rules prop
+        rules={rules} // use rules prop
         render={({ field }) => (
           <div className='input__wrapper'>
             {icon && <span className='input-icon-start'>{icon}</span>}
