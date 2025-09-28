@@ -1,0 +1,90 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "userName": "admin",
+      "gender": "male",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin",
+      "country": "Vietnam",
+      "createdAt": "2025-09-20T08:30:00Z",
+      "accessToken": "admin_token"
+    },
+    {
+      "id": "2",
+      "userName": "nguyenvana",
+      "gender": "female",
+      "email": "vana@example.com",
+      "password": "123456",
+      "role": "user",
+      "country": "Vietnam",
+      "createdAt": "2025-09-21T10:15:00Z",
+      "accessToken": "user_token"
+    },
+    {
+      "id": "mg34klcm0.xb5f4t8p8z",
+      "userName": "tuna",
+      "gender": "male",
+      "email": "dotuananh1625@gmail.com",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "country": "vietNam",
+      "createdAt": "2025-09-28T03:13:25.270Z",
+      "role": "user",
+      "accessToken": "user_token"
+    }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "title": "Việt Nam giành chiến thắng 3-0 trước Thái Lan",
+      "excerpt": "Đội tuyển Việt Nam đã có một trận đấu xuất sắc tại vòng loại World Cup...",
+      "content": "Chi tiết trận đấu: Việt Nam kiểm soát bóng 65%, ghi 3 bàn thắng vào các phút 20, 55 và 78...",
+      "authorId": 2,
+      "category": "Thể thao",
+      "tags": [
+        "bóng đá",
+        "World Cup",
+        "Việt Nam"
+      ],
+      "thumbnail": "https://picsum.photos/seed/football/400/250",
+      "createdAt": "2025-09-25T14:00:00Z",
+      "views": 1540,
+      "likes": 120
+    },
+    {
+      "id": "2",
+      "title": "Apple ra mắt iPhone 17 Pro Max",
+      "excerpt": "iPhone 17 Pro Max chính thức được công bố với nhiều cải tiến vượt trội...",
+      "content": "Theo sự kiện Apple Event 2025, iPhone 17 Pro Max sở hữu chip A19 Bionic, camera 200MP...",
+      "authorId": 1,
+      "category": "Công nghệ",
+      "tags": [
+        "Apple",
+        "iPhone",
+        "Công nghệ"
+      ],
+      "thumbnail": "https://picsum.photos/seed/iphone/400/250",
+      "createdAt": "2025-09-26T09:30:00Z",
+      "views": 2400,
+      "likes": 310
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "articleId": 1,
+      "userId": 1,
+      "content": "Trận đấu quá hay, chúc mừng đội tuyển!",
+      "createdAt": "2025-09-25T15:20:00Z"
+    },
+    {
+      "id": "2",
+      "articleId": 2,
+      "userId": 2,
+      "content": "iPhone mới quá đỉnh, nhưng chắc giá cao lắm!",
+      "createdAt": "2025-09-26T11:00:00Z"
+    }
+  ]
+}
