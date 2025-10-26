@@ -1,14 +1,10 @@
 import axiosClient from "./axiosClient";
 
-const BASE = "/api/newsArticles";
+const BASE = "/api/systemAccounts";
 
-export const newsArticleApi = {
-  getAll: async (tagId = null) => {
-    let url = BASE;
-    if (tagId) {
-      url += `?tagId=${tagId}`;
-    }
-    const response = await axiosClient.get(url);
+export const systemAccountApi = {
+  getAll: async () => {
+    const response = await axiosClient.get(BASE);
     return response.data;
   },
   getById: async (id) => {
@@ -17,7 +13,7 @@ export const newsArticleApi = {
   },
   create: async (payload) => {
     const response = await axiosClient.post(BASE, payload);
-    return response.data;
+    return response.data; 
   },
   update: async (id, payload) => {
     const response = await axiosClient.put(`${BASE}/${id}`, payload);
@@ -29,4 +25,4 @@ export const newsArticleApi = {
   },
 };
 
-export default newsArticleApi;
+export default systemAccountApi;

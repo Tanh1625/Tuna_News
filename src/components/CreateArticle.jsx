@@ -1,106 +1,72 @@
-import { useState, useEffect } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Form,
-  Button,
-  Badge,
-} from "react-bootstrap";
-import { Plus, X } from "react-bootstrap-icons";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { newsArticleApi } from "../api/newsArticleApi";
+import categoryApi from "../api/categoryApi";
 
-const CATEGORIES = [
-  { id: 1, name: "Công nghệ" },
-  { id: 2, name: "Thể thao" },
-  { id: 3, name: "Kinh tế" },
-  { id: 4, name: "Giáo dục" },
-  { id: 5, name: "Khoa học" },
-  { id: 6, name: "Sức khỏe" },
-  { id: 7, name: "Văn hóa" },
-  { id: 8, name: "Ẩm thực" },
-];
 
 export default function CreateArticle({
   articleId = null,
-  initialData = null,
   onSaved = null,
   setSaveSuccess = false,
 }) {
-  const [title, setTitle] = useState("");
-  const [excerpt, setExcerpt] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [tags, setTags] = useState([]);
-  const [newTag, setNewTag] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-  const [saving, setSaving] = useState(false);
+  const [categories, setCategories] = useState([]);
 
-  const addTag = () => {
-    if (newTag.trim() && !tags.includes(newTag.trim())) {
-      setTags([...tags, newTag.trim()]);
-      setNewTag("");
+  const fetchCategories = async () => {
+    try {
+      const data = await categoryApi.getAll();
+      setCategories(data?.data || []);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
     }
   };
-
-  const removeTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addTag();
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const payload = {
-      newsTitle: title,
-      headline: excerpt,
-      newsContent: content,
-      newsSource: thumbnail || "",
-      newsStatus: true,
-      category: category ? parseInt(category, 10) : null,
-    };
-
-    const save = async () => {
-      try {
-        setSaving(true);
-        let res;
-        if (articleId) {
-          res = await newsArticleApi.update(articleId, payload);
-        } else {
-          res = await newsArticleApi.create(payload);
-          setSaveSuccess(true);
-        }
-        if (onSaved) onSaved(res);
-      } catch (err) {
-        console.error("Error saving article:", err);
-        alert("Lỗi xảy ra khi lưu: " + (err.message || "error"));
-      } finally {
-        setSaving(false);
-      }
-    };
-
-    save();
-  };
-
+  //get categories from API
   useEffect(() => {
-    if (initialData) {
-      setTitle(initialData.newsTitle || "");
-      setExcerpt(initialData.headline || "");
-      setContent(initialData.newsContent || "");
-      setCategory(
-        initialData.category != null ? String(initialData.category) : ""
-      );
-      setTags(initialData.tags || []);
-      setThumbnail(initialData.newsSource || "");
+    fetchCategories();
+  }, []);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      newsTitle: "",
+      headline: "",
+      newsContent: "",
+      category: "",
+      newsSource: "",
+    },
+  });
+
+
+
+  const onSubmit = async (data) => {
+    const payload = {
+      newsTitle: data.newsTitle,
+      headline: data.headline,
+      newsContent: data.newsContent,
+      newsSource: data.newsSource || "",
+      newsStatus: true,
+      category: data.category ? parseInt(data.category, 10) : null,
+    };
+
+    try {
+      let res;
+      if (articleId) {
+        res = await newsArticleApi.update(articleId, payload);
+      } else {
+        res = await newsArticleApi.create(payload);
+        if (setSaveSuccess) setSaveSuccess(true);
+      }
+      if (onSaved) onSaved(res);
+    } catch (err) {
+      console.error("Error saving article:", err);
+      alert("Lỗi xảy ra khi lưu: " + (err.message || "error"));
     }
-  }, [initialData]);
+  };
 
   return (
     <Container className="py-4">
@@ -114,7 +80,7 @@ export default function CreateArticle({
             </Card.Header>
 
             <Card.Body className="p-4">
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold">
                     Tiêu đề bài viết *
@@ -122,11 +88,15 @@ export default function CreateArticle({
                   <Form.Control
                     type="text"
                     placeholder="Nhập tiêu đề..."
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
+                    {...register("newsTitle", {
+                      required: "Tiêu đề không được để trống",
+                    })}
+                    isInvalid={!!errors.newsTitle}
                     className="py-2"
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.newsTitle?.message}
+                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -135,11 +105,15 @@ export default function CreateArticle({
                     as="textarea"
                     rows={2}
                     placeholder="Mô tả ngắn..."
-                    value={excerpt}
-                    onChange={(e) => setExcerpt(e.target.value)}
-                    required
+                    {...register("headline", {
+                      required: "Mô tả ngắn không được để trống",
+                    })}
+                    isInvalid={!!errors.headline}
                     className="py-2"
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.headline?.message}
+                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Row className="mb-3">
@@ -149,18 +123,22 @@ export default function CreateArticle({
                         Danh mục *
                       </Form.Label>
                       <Form.Select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        required
+                        {...register("category", {
+                          required: "Vui lòng chọn danh mục",
+                        })}
+                        isInvalid={!!errors.category}
                         className="py-2"
                       >
                         <option value="">Chọn danh mục...</option>
-                        {CATEGORIES.map((c) => (
-                          <option key={c.id} value={c.id}>
-                            {c.name}
+                        {categories.map((c) => (
+                          <option key={c.categoryId} value={c.categoryId}>
+                            {c.categoryName}
                           </option>
                         ))}
                       </Form.Select>
+                      <Form.Control.Feedback type="invalid">
+                        {errors.category?.message}
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col md={6}>
@@ -171,8 +149,7 @@ export default function CreateArticle({
                       <Form.Control
                         type="text"
                         placeholder="https://... hoặc nguồn"
-                        value={thumbnail}
-                        onChange={(e) => setThumbnail(e.target.value)}
+                        {...register("newsSource")}
                         className="py-2"
                       />
                     </Form.Group>
@@ -187,11 +164,15 @@ export default function CreateArticle({
                     as="textarea"
                     rows={8}
                     placeholder="Nội dung..."
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    required
+                    {...register("newsContent", {
+                      required: "Nội dung không được để trống",
+                    })}
+                    isInvalid={!!errors.newsContent}
                     className="py-2"
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.newsContent?.message}
+                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <div className="d-flex justify-content-between align-items-center">
@@ -203,26 +184,17 @@ export default function CreateArticle({
                       variant="outline-secondary"
                       className="me-2"
                       type="button"
-                      onClick={() => {
-                        setTitle("");
-                        setExcerpt("");
-                        setContent("");
-                        setCategory("");
-                        setTags([]);
-                        setThumbnail("");
-                      }}
+                      onClick={() => reset()}
                     >
                       Làm mới
                     </Button>
                     <Button
                       variant="primary"
                       type="submit"
-                      disabled={
-                        !title || !excerpt || !content || !category || saving
-                      }
+                      disabled={isSubmitting}
                     >
-                      {saving
-                        ? "⏳ Lưu..."
+                      {isSubmitting
+                        ? "⏳ Đang lưu..."
                         : articleId
                         ? "Lưu thay đổi"
                         : "Đăng bài"}

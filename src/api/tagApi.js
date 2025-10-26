@@ -1,14 +1,10 @@
 import axiosClient from "./axiosClient";
 
-const BASE = "/api/newsArticles";
+const BASE = "/api/tags";
 
-export const newsArticleApi = {
-  getAll: async (tagId = null) => {
-    let url = BASE;
-    if (tagId) {
-      url += `?tagId=${tagId}`;
-    }
-    const response = await axiosClient.get(url);
+export const tagApi = {
+  getAll: async () => {
+    const response = await axiosClient.get(BASE);
     return response.data;
   },
   getById: async (id) => {
@@ -29,4 +25,4 @@ export const newsArticleApi = {
   },
 };
 
-export default newsArticleApi;
+export default tagApi;
