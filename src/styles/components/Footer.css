@@ -1,0 +1,29 @@
+.custom-footer {
+  background: #1a1a1a !important;
+  margin-top: auto;
+}
+
+.footer-link {
+  color: #adb5bd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.footer-link:hover {
+  color: #007bff;
+}
+
+.social-links .social-link {
+  color: #adb5bd;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+
+.social-links .social-link:hover {
+  color: white;
+  background: #007bff;
+  transform: translateY(-2px);
+}

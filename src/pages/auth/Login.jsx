@@ -10,15 +10,16 @@ import "../../styles/Login.css";
 import userSvg from "../../assets/icons/user.svg";
 import lockSvg from "../../assets/icons/lock.svg";
 import { useLoading } from "../../context/loading-context";
-import { DEFAULT_ACCOUNT } from "../../constants";
-import { login } from "../../services/AuApi";
+import { authApi } from "../../api/auth.js";
+import { useAuth } from "../../context/auth-context";
 
 export default function Login() {
   const { startLoading, stopLoading } = useLoading();
+  const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const userIcon = <img src={userSvg} alt="User Icon" />;
   const lockIcon = <img src={lockSvg} alt="Lock Icon" />;
@@ -30,30 +31,46 @@ export default function Login() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      userName: "",
+      email: "",
       password: "",
     },
   });
 
-
   const onSubmit = async (data) => {
     try {
-      const { userName, password } = data;
-      const user = { userName, password };
+      const { email, password } = data;
+      const user = { email, password };
 
-      // Simulate API call
       startLoading();
-      const res = await login(user);
-      localStorage.setItem("user", JSON.stringify(res));
-      localStorage.setItem("accessToken", res.accessToken);
-      setError('');
-      navigate("/demo");
+      const res = await authApi.login(user);
+      const token = res.data.data;
 
+      // Use AuthContext login to update global state
+      const userLogin = login(token);
+      console.log("User info:", userLogin);
+
+      // Safe check for roles
+      if (userLogin && userLogin.roles && userLogin.roles.length > 0) {
+        if (userLogin.roles[0] === "ROLE_ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/home");
+        }
+      } else {
+        // Default to home if no roles found
+        navigate("/home");
+      }
+
+      setError(""); // Clear any previous errors
     } catch (error) {
-      setError(error.message || "Đăng nhập thất bại. Vui lòng thử lại.");
+      setError(
+        error.response?.data?.message ||
+          error.message ||
+          "Đăng nhập thất bại. Vui lòng thử lại."
+      );
       console.error("Login error:", error);
     } finally {
-        stopLoading();
+      stopLoading();
     }
   };
 
@@ -67,16 +84,16 @@ export default function Login() {
             </div>
 
             <Form onSubmit={handleSubmit(onSubmit)} noValidate>
-              {/* Username Field */}
+              {/* Email Field */}
               <CustomTextField
-                name="userName"
+                name="email"
                 control={control}
                 errors={errors}
                 type="text"
-                placeholder="Nhập tên tài khoản của bạn"
+                placeholder="Nhập email của bạn"
                 required={true}
                 className="mb-2 input-glass"
-                rules={VALIDATION_LOGIN_RULES.userName}
+                rules={VALIDATION_LOGIN_RULES.email}
                 icon={userIcon}
               />
 
@@ -96,9 +113,7 @@ export default function Login() {
               {/* API Error Display */}
               {error && (
                 <div className="alert alert-danger mb-3" role="alert">
-                  <small>
-                    {error}
-                  </small>
+                  <small>{error}</small>
                 </div>
               )}
 
