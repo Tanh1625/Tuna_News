@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Validation rules
 export const VALIDATION_LOGIN_RULES = {
-  userName: {
+  email: {
     required: "Tên đăng nhập là bắt buộc",
     minLength: {
       value: 1,
@@ -13,7 +13,7 @@ export const VALIDATION_LOGIN_RULES = {
       message: "Tên đăng nhập không được vượt quá 50 ký tự",
     },
     pattern: {
-      value: /^[a-zA-Z0-9_]+$/,
+      value: /^(?:[a-zA-Z0-9_]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
       message: "Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới",
     },
   },

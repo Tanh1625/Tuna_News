@@ -1,11 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
-  Newspaper,
-} from "react-bootstrap-icons";
+import { Facebook, Twitter, Instagram, Youtube } from "react-bootstrap-icons";
 import logoImage from "../../assets/images/logo.png";
 import "../../styles/components/Footer.css";
 
@@ -22,9 +16,8 @@ export default function Footer() {
                 className="me-2 logo-img"
                 style={{ height: "40px", width: "auto" }}
               />
-              <h5 className="mb-0 fw-bold">NewsHub</h5>
             </div>
-            <p className="text-muted small">
+            <p className="text-light small">
               Nền tảng chia sẻ tin tức và kết nối cộng đồng hàng đầu Việt Nam.
               Cập nhật thông tin nhanh chóng, chính xác và đáng tin cậy.
             </p>
@@ -98,10 +91,10 @@ export default function Footer() {
                 <Youtube size={20} />
               </a>
             </div>
-            <p className="small text-muted">
-              📧 contact@newshub.vn
+            <p className="small text-light">
+              contact@tunash.vn
               <br />
-              📱 +84 123 456 789
+              +84 123 456 789
             </p>
           </Col>
         </Row>
@@ -109,8 +102,8 @@ export default function Footer() {
         <hr className="my-3" />
         <Row>
           <Col className="text-center">
-            <p className="small text-muted mb-0">
-              © 2025 NewsHub. Tất cả quyền được bảo lưu. | Thiết kế bởi SBA Team
+            <p className="small text-light mb-0">
+              © 2025 Tunash News. Tất cả quyền được bảo lưu. | Thiết kế bởi SBA Team
             </p>
           </Col>
         </Row>

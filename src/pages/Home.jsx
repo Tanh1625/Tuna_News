@@ -1,33 +1,40 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { Container, Row, Col, Card, Badge, Button } from "react-bootstrap";
-import { Eye, Heart, Calendar, Person } from "react-bootstrap-icons";
-import axios from "axios";
-// import "./Home.css";
+import { Eye, Heart, Calendar, Person, Plus } from "react-bootstrap-icons";
+import CreateArticle from "../components/CreateArticle";
+import { newsArticleApi } from "../api/newsArticleApi";
+import { Link } from "react-router-dom";
+
 export default function Home() {
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [articlesRes, usersRes] = await Promise.all([
-          axios.get("http://localhost:3000/articles"),
-          axios.get("http://localhost:3000/users"),
-        ]);
-        setArticles(articlesRes.data);
-        setUsers(usersRes.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-  const getAuthorName = (authorId) => {
-    const author = users.find((user) => user.id == authorId);
-    return author ? author.userName : "Unknown Author";
+
+  const handleGetArticles = async () => {
+    try {
+      const articlesRes = await newsArticleApi.getAll(0, 50);
+      // API returns ApiResponse wrapper -> data property contains page
+      const page = articlesRes.data;
+      setArticles(page.content || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    handleGetArticles();
+  }, []);
+
+  useEffect(() => {
+    if (saveSuccess) {
+      handleGetArticles();
+      setSaveSuccess(false);
+    }
+  }, [saveSuccess]);
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("vi-VN", {
       year: "numeric",
@@ -53,16 +60,31 @@ export default function Home() {
   }
   return (
     <Container className="py-4">
-      {" "}
       <div className="text-center mb-5">
-        {" "}
-        <h1 className="fw-bold text-primary">📰 NewsHub</h1>{" "}
-        <p className="lead text-muted">Tin tức nóng hổi mỗi ngày</p>{" "}
-      </div>{" "}
+        <p className="lead text-muted">Tin tức nóng hổi mỗi ngày</p>
+
+        {/* Toggle Create Article Button */}
+        <Button
+          variant="success"
+          onClick={() => setShowCreateForm(!showCreateForm)}
+          className="mb-3"
+        >
+          <Plus size={18} className="me-1" />
+          {showCreateForm ? "Ẩn form đăng bài" : "Đăng bài viết mới"}
+        </Button>
+      </div>
+
+      {/* Create Article Form */}
+      {showCreateForm && (
+        <div className="mb-5">
+          <CreateArticle setSaveSuccess={setSaveSuccess} />
+        </div>
+      )}
+
+      {/* Existing articles list */}
       <Row>
-        {" "}
         {articles.map((article) => (
-          <Col key={article.id} lg={6} className="mb-4">
+          <Col key={article.newArticleId} lg={6} className="mb-4">
             {" "}
             <Card className="h-100 shadow-sm border-0 rounded-3 overflow-hidden">
               {" "}
@@ -83,64 +105,37 @@ export default function Home() {
                 </Badge>{" "}
               </div>{" "}
               <Card.Body className="p-4">
-                {" "}
-                {/* Title */}{" "}
                 <Card.Title
                   className="fw-bold mb-3"
                   style={{ fontSize: "1.4rem" }}
                 >
-                  {" "}
-                  {article.title}{" "}
-                </Card.Title>{" "}
-                {/* Excerpt */}{" "}
+                  {article.newsTitle}
+                </Card.Title>
+
                 <Card.Text className="text-muted mb-3">
-                  {" "}
-                  {article.excerpt}{" "}
-                </Card.Text>{" "}
-                {/* Tags */}{" "}
-                <div className="mb-3">
-                  {" "}
-                  {article.tags.map((tag, index) => (
-                    <Badge
-                      key={index}
-                      bg="light"
-                      text="dark"
-                      className="me-1 mb-1 px-2 py-1"
-                    >
-                      {" "}
-                      #{tag}{" "}
-                    </Badge>
-                  ))}{" "}
-                </div>
-                {/* Stats */}
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <div className="d-flex align-items-center text-muted small">
-                    <Eye size={16} className="me-1" />
-                    <span className="me-3">
-                      {article.views.toLocaleString()} lượt xem
-                    </span>
-                    <Heart size={16} className="me-1" />
-                    <span>{article.likes} thích</span>
-                  </div>
-                </div>
-                {/* Author & Date */}
+                  {article.headline}
+                </Card.Text>
+
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <div className="d-flex align-items-center">
                     <Person size={18} className="text-muted me-2" />
                     <span className="fw-semibold">
-                      {getAuthorName(article.authorId)}
+                      {article.createdBy}
                     </span>
                   </div>
                   <div className="d-flex align-items-center text-muted small">
                     <Calendar size={14} className="me-1" />
-                    <span>{formatDate(article.createdAt)}</span>
+                    <span>{formatDate(article.createdDate)}</span>
                   </div>
                 </div>
-                {/* Read More Button */}
+
                 <div className="d-grid">
-                  <Button variant="primary" size="sm" className="fw-semibold">
+                  <Link
+                    to={`/news/${article.newArticleId}`}
+                    className="btn btn-primary btn-sm fw-semibold text-decoration-none text-white"
+                  >
                     Đọc thêm →
-                  </Button>
+                  </Link>
                 </div>
               </Card.Body>
             </Card>
@@ -161,44 +156,6 @@ export default function Home() {
       <div className="text-center mb-4">
         <h3 className="fw-bold">👥 Cộng tác viên</h3>
       </div>
-      <Row>
-        {users.map(
-          (user) =>
-            (user.role === "admin" || user.role === "contributor") && (
-              <Col key={user.id} md={4} className="mb-3">
-                <Card className="text-center border-0 shadow-sm">
-                  <Card.Body className="py-4">
-                    <div className="mb-3">
-                      <div
-                        className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto"
-                        style={{
-                          width: "60px",
-                          height: "60px",
-                          fontSize: "1.5rem",
-                        }}
-                      >
-                        {user.userName.charAt(0).toUpperCase()}
-                      </div>
-                    </div>
-                    <h6 className="fw-bold mb-1">{user.userName}</h6>
-                    <small className="text-muted d-block mb-2">
-                      {user.email}
-                    </small>
-                    <Badge
-                      bg={user.role === "admin" ? "danger" : "secondary"}
-                      className="mb-2"
-                    >
-                      {user.role === "admin" ? "Admin" : "Cộng tác viên"}
-                    </Badge>
-                    <div className="small text-muted">
-                      <span> {user.country}</span>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            )
-        )}
-      </Row>
     </Container>
   );
 }
